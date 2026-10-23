@@ -1,0 +1,24 @@
+{
+  "name": "3d-interactive-love-museum",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Digital Anniversary — 3D Interactive Love Museum",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "serve": "^14.2.6",
+    "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  }
+}

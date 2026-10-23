@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Beginning — Love Museum</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="section" aria-labelledby="beg-title">
+      <p class="hero-eyebrow">Room I</p>
+      <h1 id="beg-title" class="section-title" data-config="journalTitle">Where the Story Began</h1>
+      <p class="section-sub" id="beg-meta">12 December 2021 · The little café on Maple Street</p>
+
+      <div style="display:grid; grid-template-columns: 1fr; gap: 28px; margin-top: 28px;">
+        <article class="glass" style="padding: clamp(22px, 4vw, 40px);" aria-label="Journal entry">
+          <div id="journal" style="font-family: var(--font-serif); font-size: clamp(17px, 2.2vw, 20px); line-height: 1.8; color: var(--cream);"></div>
+        </article>
+
+        <figure class="glass" style="margin:0; padding: 14px;" aria-label="First memory">
+          <div style="aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: linear-gradient(135deg, rgba(255,122,168,0.2), rgba(107,63,160,0.2)); display:grid; place-items:center;">
+            <img id="beg-photo" src="assets/images/beginning.jpg" alt="Placeholder for our first photo"
+                 style="width:100%; height:100%; object-fit: cover; display:block;"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.img-fallback').hidden=false;" />
+            <div class="img-fallback" hidden style="text-align:center; color: var(--muted); padding: 20px;">
+              <div style="font-size: 42px; color: var(--rose); margin-bottom: 8px;">♥</div>
+              <p>Drop your first photo at <code>assets/images/beginning.jpg</code></p>
+            </div>
+          </div>
+          <figcaption id="beg-caption" style="color: var(--muted); font-size: 13px; padding: 12px 6px 4px;">The first photo we ever took together.</figcaption>
+        </figure>
+      </div>
+
+      <div class="mt-lg center">
+        <a class="btn" href="timeline.html">Continue to Our Timeline <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/background.js" defer></script>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const b = window.LOVE_CONFIG.beginning;
+      const meta = document.getElementById("beg-meta");
+      if (meta) meta.textContent = `${b.date} · ${b.place}`;
+      const j = document.getElementById("journal");
+      if (j) {
+        j.innerHTML = b.journal.map((p) => `<p style="margin: 0 0 1.1em;">${p}</p>`).join("");
+      }
+      const img = document.getElementById("beg-photo");
+      if (img) img.src = b.photo;
+      const cap = document.getElementById("beg-caption");
+      if (cap) cap.textContent = b.photoCaption;
+    });
+  </script>
+</body>
+</html>
