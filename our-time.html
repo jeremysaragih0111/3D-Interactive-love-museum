@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Time — Love Museum</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .time-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin-top: 24px;
+    }
+    .time-card { padding: 24px; text-align: center; }
+    .time-num {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 6vw, 54px);
+      font-weight: 600;
+      line-height: 1;
+      background: linear-gradient(135deg, #fff, var(--rose-soft), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+    .time-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .anniv-card { padding: clamp(24px, 5vw, 44px); text-align: center; margin-top: 28px; }
+    .anniv-num { font-family: var(--font-serif); font-size: clamp(40px, 8vw, 76px); color: var(--cream); line-height: 1; }
+  </style>
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="section" aria-labelledby="t-heading">
+      <p class="hero-eyebrow">Room V</p>
+      <h1 id="t-heading" class="section-title">Our Time</h1>
+      <p class="section-sub">Every second counted, softly — because even time has learned to hold your name.</p>
+
+      <div id="anniversary-message" class="glass" hidden style="padding: 18px 22px; margin-bottom: 22px; border-color: rgba(255,122,168,0.5);">
+        <strong style="color: var(--rose-soft);">Happy Anniversary!</strong>
+        <span id="anniversary-text" style="color: var(--cream);"></span>
+      </div>
+
+      <div class="time-grid" id="time-grid"></div>
+
+      <div class="glass anniv-card" aria-labelledby="anniv-title">
+        <h2 id="anniv-title" class="time-label">Until our next anniversary</h2>
+        <p class="anniv-num" id="anniv-countdown">—</p>
+        <p class="time-label" id="anniv-date-label"></p>
+      </div>
+
+      <div class="mt-lg center">
+        <a class="btn" href="surprise.html">Open the Surprise <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/background.js" defer></script>
+  <script src="js/pages/our-time.js" defer></script>
+</body>
+</html>
