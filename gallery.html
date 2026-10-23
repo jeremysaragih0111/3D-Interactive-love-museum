@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Gallery — Love Museum</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 22px;
+      margin-top: 20px;
+      perspective: 1200px;
+    }
+    .g-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.25s var(--ease), box-shadow 0.35s var(--ease);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+    .g-card:hover { box-shadow: 0 24px 60px rgba(255, 122, 168, 0.25); }
+    .g-card img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+    }
+    .g-card .fallback {
+      width: 100%; aspect-ratio: 4/3; display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(255,122,168,0.18), rgba(107,63,160,0.18));
+      color: var(--rose); font-size: 42px;
+    }
+    .g-caption {
+      padding: 12px 14px; font-size: 13px; color: var(--muted);
+      background: rgba(20, 8, 32, 0.5);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(8, 2, 16, 0.9);
+      backdrop-filter: blur(10px);
+      display: grid; place-items: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s var(--ease);
+    }
+    .lightbox.is-open { opacity: 1; pointer-events: auto; }
+    .lb-inner {
+      max-width: min(900px, 92vw); max-height: 84vh;
+      display: grid; gap: 14px; justify-items: center;
+      transform: scale(0.96);
+      transition: transform 0.35s var(--ease);
+    }
+    .lightbox.is-open .lb-inner { transform: scale(1); }
+    .lb-inner img { max-width: 100%; max-height: 72vh; border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+    .lb-fallback {
+      width: min(600px, 90vw); aspect-ratio: 4/3;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(255,122,168,0.2), rgba(107,63,160,0.2));
+      border-radius: 14px; color: var(--rose); font-size: 72px;
+    }
+    .lb-caption { color: var(--cream); font-family: var(--font-serif); font-size: 20px; }
+    .lb-controls { display: flex; gap: 10px; }
+    .lb-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);
+      color: var(--cream); font-size: 20px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="section" aria-labelledby="g-heading">
+      <p class="hero-eyebrow">Room III</p>
+      <h1 id="g-heading" class="section-title">Memory Gallery</h1>
+      <p class="section-sub">A quiet hall of moments. Hover to feel the tilt. Click to step closer.</p>
+
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-close" id="lb-close" aria-label="Close photo viewer">✕</button>
+    <div class="lb-inner">
+      <div id="lb-media"></div>
+      <p class="lb-caption" id="lb-caption"></p>
+      <div class="lb-controls">
+        <button class="btn btn-ghost" id="lb-prev" aria-label="Previous photo">← Prev</button>
+        <button class="btn btn-ghost" id="lb-next" aria-label="Next photo">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/background.js" defer></script>
+  <script src="js/pages/gallery.js" defer></script>
+</body>
+</html>
